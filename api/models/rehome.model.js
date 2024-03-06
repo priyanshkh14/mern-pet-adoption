@@ -41,11 +41,6 @@ const rehomeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    adoptionStatus: {
-      type: String,
-      enum: ['Available', 'Adopted', 'Pending'],
-      required: true,
-    },
     imageUrls: {
       type: Array,
       required: true,
