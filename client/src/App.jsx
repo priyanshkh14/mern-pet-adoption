@@ -8,6 +8,7 @@ import SignUp from './pages/SignUp';
 import Blogs from './pages/Blogs';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
+import CreateRehome from './pages/CreateRehome';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path='/create-rehome' element={<CreateRehome />} />
       </Route> 
     </Routes>
   </BrowserRouter>
