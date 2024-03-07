@@ -49,3 +49,16 @@ export const updateRehome = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getRehome = async (req, res, next) => {
+  try {
+    const rehome = await Rehome.findById(req.params.id);
+    if (!rehome) {
+      return next(errorHandler(404, 'Rehome not found!'));
+    }
+    res.status(200).json(rehome);
+  } catch (error) {
+    next(error);
+  }
+  
+  }

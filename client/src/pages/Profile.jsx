@@ -232,15 +232,15 @@ export default function Profile() {
         {updateSuccess ? 'User is updated successfully!' : ''}
       </p>
       <button onClick={handleShowRehome} className='text-green-700 w-full'>
-        Show Rehome
+        Show My Animal Rehome List
       </button>
       <p className='text-red-700 mt-5'>
-        {showRehomeError ? 'Error showing rehome' : ''}
+        {showRehomeError ? 'Error showing rehome list' : ''}
       </p>
 
       {userRehome && userRehome.length > 0 && (
         <div className="flex flex-col gap-4">
-          <h1 className='text-center mt-7 text-2xl font-semibold'>Your Rehome</h1>
+          <h1 className='text-center mt-7 text-2xl font-semibold'>Your Animal Rehome List</h1>
           {userRehome.map((rehome) => (
             <div
               key={rehome._id}
@@ -262,7 +262,9 @@ export default function Profile() {
 
               <div className='flex flex-col item-center'>
                 <button onClick={() => handleRehomeDelete(rehome._id)} className='text-red-700 uppercase'>Delete</button>
+                <Link to={`/update-rehome/${rehome._id}`}>
                 <button className='text-green-700 uppercase'>Edit</button>
+                </Link>
               </div>
             </div>
           ))}
