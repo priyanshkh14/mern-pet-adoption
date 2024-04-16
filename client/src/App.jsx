@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
@@ -9,6 +8,8 @@ import Blogs from './pages/Blogs';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import CreateRehome from './pages/CreateRehome';
+import UpdateRehome from './pages/UpdateRehome';
+import Rehome from './pages/Rehome';
 
 export default function App() {
   return (
@@ -20,9 +21,11 @@ export default function App() {
       <Route path="/sign-in" element={<SignIn />} />
       <Route path="/sign-up" element={<SignUp />} />
       <Route path="/about" element={<About />} />
+      <Route path='/rehome/:rehomeId' element={<Rehome />} />
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
         <Route path='/create-rehome' element={<CreateRehome />} />
+        <Route path='/update-rehome/:rehomeId' element={<UpdateRehome />} />
       </Route> 
     </Routes>
   </BrowserRouter>
