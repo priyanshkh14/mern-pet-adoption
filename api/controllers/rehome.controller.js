@@ -62,3 +62,26 @@ export const getRehome = async (req, res, next) => {
   }
   
   }
+
+export const getRehomes = async (req, res, next) => {
+  try {
+    const limit = parseInt(req.query.limit) || 9;
+    const startIndex = parseInt(req.query.startIndex) || 0;
+  
+    const searchTerm = req.query.searchTerm || '';
+
+    const rehomes = await Rehome.find({
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { breed: { $regex: searchTerm, $options: 'i' } },
+        { species: { $regex: searchTerm, $options: 'i' } }
+      ]
+    })
+      .limit(limit)
+      .skip(startIndex);
+
+    return res.status(200).json(rehomes);
+  } catch (error) {
+    next(error);
+  }
+};
