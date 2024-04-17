@@ -10,7 +10,7 @@ export default function Search() {
 
   const [loading, setLoading] = useState(false);
   const [rehomes, setRehomes] = useState([]);
-  console.log(rehomes);
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
@@ -26,9 +26,15 @@ export default function Search() {
 
     const fetchRehomes = async () => {
       setLoading(true);
+      setShowMore(false);
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/rehome/get?${searchQuery}`);
       const data = await res.json();
+      if (data.length > 8) {
+        setShowMore(true);
+      } else {
+        setShowMore(false);
+      }
       setRehomes(data);
       setLoading(false);
     };
@@ -48,6 +54,20 @@ export default function Search() {
     urlParams.set('searchTerm', sidebardata.searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+
+  const onShowMoreClick = async () => {
+    const numberOfRehomes = rehomes.length;
+    const startIndex = numberOfRehomes;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set('startIndex', startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/rehome/get?${searchQuery}`);
+    const data = await res.json();
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setRehomes([...rehomes, ...data]);
   };
 
   return (
@@ -85,6 +105,16 @@ export default function Search() {
             rehomes.map((rehome) => (
               <RehomeItem key={rehome._id} rehome={rehome} />
           ))}
+
+          {showMore && (
+            <button
+              onClick={onShowMoreClick}
+              className='text-slate-700 hover:underline p-7 text-center w-full'
+            >
+              Show more
+            </button>
+          )}
+
         </div>
       </div>
     </div>
