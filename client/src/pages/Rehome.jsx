@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
+import { useSelector } from 'react-redux';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
 import {
@@ -13,6 +14,8 @@ import {
   FaSyringe,
   FaTransgender,
 } from 'react-icons/fa';
+import { current } from '@reduxjs/toolkit';
+import Contact from '../components/Contact';
 
 export default function Rehome() {
   SwiperCore.use([Navigation]);
@@ -20,7 +23,11 @@ export default function Rehome() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [contact, setContact] = useState(false);
   const params = useParams();
+  const {currentUser} = useSelector((state) => state.user);
+
+  console.log(currentUser._id, rehome?.userRef);
   useEffect(() => {
     const fetchRehome = async () => {
       try {
@@ -42,7 +49,6 @@ export default function Rehome() {
     };
     fetchRehome();
   }, [params.rehomeId]);
-  console.log(loading);
 
   return (
     <main>
@@ -126,8 +132,11 @@ export default function Rehome() {
               {rehome.gender}
             </li>
            </ul>
+           {currentUser && rehome.userRef != currentUser._id && !contact &&(
+            <button onClick={()=>setContact(true)} className='bg-red-700 text-white rounded-lg uppercase hover:opacity-95 p-3'>Contact Owner</button>
+           )}
+           {(contact && <Contact rehome={rehome}/>)}
           </div>
-
 
 
         </div>
