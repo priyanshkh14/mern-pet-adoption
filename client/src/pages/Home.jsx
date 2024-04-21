@@ -104,6 +104,19 @@ export default function Home() {
 
 
       {/* bottom */}
+      <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
+      <h1 className='text-red-700 font-bold text-3xl lg:text-6xl'>
+        Share <span className='text-red-500'>Your</span> Story
+      </h1>
+      <div className='text-gray-600 text-s sm:text-m'>
+        Barks&Whiskers is the best place to find your next best buddy.
+        <br/>
+        We have a wide range of animals that need your love.
+      </div>
+      <Link to={"/create-blog"} className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'>
+        Share your story here...
+      </Link>
+    </div>
     </div>
   )
 }

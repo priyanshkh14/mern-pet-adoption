@@ -11,6 +11,7 @@ import CreateRehome from './pages/CreateRehome';
 import UpdateRehome from './pages/UpdateRehome';
 import Rehome from './pages/Rehome';
 import Search from './pages/Search';
+import CreateBlog from './pages/CreateBlog';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
       <Route element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
         <Route path='/create-rehome' element={<CreateRehome />} />
+        <Route path='/create-blog' element={<CreateBlog />} />
         <Route path='/update-rehome/:rehomeId' element={<UpdateRehome />} />
       </Route> 
     </Routes>
